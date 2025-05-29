@@ -7,9 +7,9 @@ namespace CinemaApp.Web.Controllers
 {
     public class MovieController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly CinemaAppDbContext _context;
 
-        public MovieController(ApplicationDbContext context)
+        public MovieController(CinemaAppDbContext context)
         {
             _context = context;
         }

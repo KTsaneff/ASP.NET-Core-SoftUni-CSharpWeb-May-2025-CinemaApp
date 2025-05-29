@@ -2,12 +2,43 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using static CinemaApp.Data.Common.EntityConstants.Movie;
+
 namespace CinemaApp.Data.Configuration
 {
     public class MovieConfiguration : IEntityTypeConfiguration<Movie>
     {
         public void Configure(EntityTypeBuilder<Movie> builder)
         {
+            builder
+                .Property(m => m.Title)
+                .IsRequired()
+                .HasMaxLength(TitleMaxLength);
+
+            builder
+                .Property(m => m.Genre)
+                .IsRequired()
+                .HasMaxLength(GenreMaxLength);
+
+            builder
+                .Property(m => m.Description)
+                .IsRequired()
+                .HasMaxLength(DescriptionMaxLength);
+
+            builder
+                .Property(m => m.ImageUrl)
+                .HasMaxLength(2048);
+
+            builder
+                .Property(m => m.Director)
+                .IsRequired()
+                .HasMaxLength(DirectorMaxLength);
+
+            builder
+                .Property(m => m.IsDeleted)
+                .IsRequired()
+                .HasDefaultValue(false);
+
             builder.HasData(this.SeedMovies());
         }
 
