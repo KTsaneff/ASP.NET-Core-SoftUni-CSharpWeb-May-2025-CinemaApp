@@ -32,7 +32,7 @@ namespace CinemaApp.Data.Configuration
             builder
                 .Property(m => m.Director)
                 .IsRequired()
-                .HasMaxLength(DirectorMaxLength);
+                .HasMaxLength(DirectorNameMaxLength);
 
             builder
                 .Property(m => m.IsDeleted)
