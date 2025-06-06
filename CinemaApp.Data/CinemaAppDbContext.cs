@@ -9,6 +9,9 @@
     {
 
         public virtual DbSet<Movie> Movies { get; set; }
+
+        public virtual DbSet<UserMovie> UserMovies { get; set; }
+
         public CinemaAppDbContext(DbContextOptions<CinemaAppDbContext> options)
             : base(options)
         {
