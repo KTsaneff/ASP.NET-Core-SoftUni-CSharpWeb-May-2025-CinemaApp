@@ -17,11 +17,11 @@
 		@foreach (var movie in Model)
 		{
 			<div class="card shadow-lg border-0 rounded-3 d-flex flex-row align-items-center p-2"
-				 style="height: 140px; max-height: 140px;">
+			style="height: 140px; max-height: 140px;">
 
 				<img src="@movie.ImageUrl" class="rounded"
-					 alt="@movie.Title"
-					 style="width: 100px; height: 130px; object-fit: cover;">
+				alt="@movie.Title"
+				style="width: 100px; height: 130px; object-fit: cover;">
 
 				<div class="card-body ms-3 p-2 text-light" style="flex-grow: 1;">
 					<h6 class="fw-bold mb-1 text-dark">@movie.Title</h6>
@@ -36,18 +36,22 @@
 
 				<div class="me-3 d-flex gap-2">
 					<a asp-controller="Movie"
-					   asp-action="Details"
-					   asp-route-id="@movie.Id"
-					   class="btn btn-primary btn-sm rounded-pill px-4 fw-bold">
+						asp-action="Details"
+						asp-route-id="@movie.Id"
+						class="btn btn-primary btn-sm rounded-pill px-4 fw-bold">
 						<i class="fas fa-eye"></i> View Details
 					</a>
 
-					<a asp-controller="Watchlist"
-					   asp-action="Add"
-					   asp-route-id="@movie.Id"
-					   class="btn btn-warning btn-sm rounded-pill px-4 fw-bold">
-						<i class="bi bi-bookmark-star"></i> Add to Watchlist
-					</a>
+					@if (User?.Identity?.IsAuthenticated ?? false)
+					{
+						<form asp-controller="Watchlist" asp-action="Add" method="post" class="d-inline">
+							<input type="hidden" name="movieId" value="@movie.Id" />
+							<button type="submit" class="btn btn-warning btn-sm rounded-pill px-4 fw-bold">
+								<i class="bi bi-bookmark-star"></i> Add to Watchlist
+							</button>
+						</form>
+					}
+					
 				</div>
 
 			</div>
